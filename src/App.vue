@@ -36,6 +36,18 @@
     }
   }
 
+  async function excluirProduto(id: number) {
+    try {
+      const response = await http.delete(`/produtos/${id}`);
+
+      if (response.status < 300) {
+        listarProdutos();
+      }
+    } catch (error) {
+      console.error('Erro no DELETE:', error);
+    }
+  }
+
 </script>
 
 <template>
@@ -70,7 +82,7 @@
               <td>
                 <div class="gap-2 d-flex">
                   <button class="btn btn-primary"><img src="./assets/editar.png" alt="" width="20"></button>
-                  <button class="btn btn-danger"><img src="./assets/lixeira-de-reciclagem.png" alt="" width="20"></button>
+                  <button class="btn btn-danger" @click="excluirProduto(value.id)"><img src="./assets/lixeira-de-reciclagem.png" alt="" width="20"></button>
                 </div>
               </td>
             </tr>
